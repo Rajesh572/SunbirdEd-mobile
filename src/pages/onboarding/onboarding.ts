@@ -167,8 +167,8 @@ export class OnboardingPage {
       this.userProfileService.getTenantInfo(
         request,
         res => {
-          const r = JSON.parse(res);
-          (<any>window).splashscreen.setContent(that.orgName, r.logo);
+          const r = JSON.parse(res);//commented next line to avoid splashscreen changes
+        //  (<any>window).splashscreen.setContent(that.orgName, r.logo); console.log('orgname and logo',that.orgName,r.logo);
           resolve();
         },
         error => {

@@ -50,6 +50,7 @@ export class QRScannerResultHandler {
     }
 
     handleDialCode(source: string, scannedData: string) {
+        console.log('dialurl:',scannedData);
         this.source = source;
         const results = scannedData.split('/');
         const dialCode = results[results.length - 1];
@@ -97,6 +98,7 @@ export class QRScannerResultHandler {
         corRelation.id = identifier;
         corRelation.type = type;
         corRelationList.push(corRelation);
+        console.log('correlationlist: ',corRelationList);
         return corRelationList;
     }
 

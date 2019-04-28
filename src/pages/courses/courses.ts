@@ -694,7 +694,7 @@ export class CoursesPage implements OnInit {
       InteractSubtype.VIEWALL_CLICKED,
       Environment.HOME,
       PageId.COURSES, undefined,
-      values);
+      values); console.log('params are',params);
     this.navCtrl.push(ViewMoreActivityPage, params);
   }
 

@@ -31,6 +31,8 @@ export class CategoriesEditPage {
   subjectList = [];
   gradeList = [];
   mediumList = [];
+  /* added blist variable for board aka target audience*/
+  blist = [];
 
   profile: Profile;
   profileEditForm: FormGroup;
@@ -91,6 +93,7 @@ export class CategoriesEditPage {
    */
   ionViewWillEnter() {
     this.getSyllabusDetails();
+    this.resetForm(0); //this will resets the form from the beining
   }
 
   /**
@@ -201,6 +204,7 @@ export class CategoriesEditPage {
       if (this.frameworkId.length !== 0) {
         this.formAndFrameworkUtilService.getFrameworkDetails(this.frameworkId)
           .then(catagories => {
+            this.blist = catagories[1].terms; //terms for board aka target audience
             this.categories = catagories;
             // loader.dismiss();
             const request: CategoryRequest = {
@@ -271,7 +275,7 @@ export class CategoriesEditPage {
    * It will validate the forms and internally call submit method
    */
   onSubmit() {
-    const formVal = this.profileEditForm.value;
+    const formVal = this.profileEditForm.value; console.log('formvalue',formVal);
     if (!formVal.boards.length) {
       if (this.showOnlyMandatoryFields) {
         this.boardSelect.open();
@@ -330,19 +334,19 @@ export class CategoriesEditPage {
     }
     if (formVal.boards) {
       const code = typeof (formVal.boards) === 'string' ? formVal.boards : formVal.boards[0];
-      framework['board'] = [this.boardList.find(board => code === board.code).name];
+      framework['board'] = [this.blist.find(board => code === board.code).name]; //boardlist changed to blist 
     }
     if (formVal.medium && formVal.medium.length) {
       const Names = [];
       formVal.medium.forEach(element => {
-        Names.push(this.mediumList.find(medium => element === medium.code).name);
+        Names.push(this.gradeList.find(medium => element === medium.code).name); //mediumList changed to gradeList
       });
       framework['medium'] = Names;
     }
     if (formVal.grades && formVal.grades.length) {
       const Names = [];
       formVal.grades.forEach(element => {
-        Names.push(this.gradeList.find(grade => element === grade.code).name);
+        Names.push(this.boardList.find(grade => element === grade.code).name); //gradeList changed to boardList
       });
       framework['gradeLevel'] = Names;
     }
@@ -354,7 +358,7 @@ export class CategoriesEditPage {
       framework['subject'] = Names;
     }
     req.userId = this.profile.uid;
-    req.framework = framework;
+    req.framework = framework; console.log('from submitform',framework);
     this.userProfileService.updateUserInfo(req,
       (res: any) => {
         this.loader.dismiss();

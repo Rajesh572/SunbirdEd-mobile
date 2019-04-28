@@ -15,7 +15,7 @@ import {
   UserProfileService
 } from 'sunbird';
 import {ProfileSettingsPage} from './../pages/profile-settings/profile-settings';
-import {Component, NgZone, ViewChild} from '@angular/core';
+import {Component, NgZone, ViewChild, AfterViewInit} from '@angular/core';
 import {App, Events, Nav, Platform, PopoverController, ToastController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {GUEST_STUDENT_TABS, GUEST_TEACHER_TABS, initTabs, LOGIN_TEACHER_TABS} from './module.service';
@@ -44,10 +44,13 @@ const KEY_SUNBIRD_SUPPORT_FILE_PATH = 'sunbird_support_file_path';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements AfterViewInit{
   @ViewChild(Nav) nav;
   rootPage: any;
   public counter = 0;
+
+ngAfterViewInit() {
+}
 
   readonly permissionList = ['android.permission.CAMERA',
     'android.permission.WRITE_EXTERNAL_STORAGE',
@@ -84,7 +87,7 @@ export class MyApp {
 
     const that = this;
 
-    platform.ready().then(async () => {
+    platform.ready().then(async () => { console.log('paltform is ready');
       this.registerDeeplinks();
       this.openrapDiscovery();
       this.imageLoaderConfig.enableDebugMode();

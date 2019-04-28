@@ -82,6 +82,7 @@ export class CourseCard implements OnInit {
    * @param {object} content
    */
   navigateToDetailPage(content: any, layoutName: string): void {
+    console.log('content details',content);
     const identifier = content.contentId || content.identifier;
     const telemetryObject: TelemetryObject = new TelemetryObject();
     telemetryObject.id = identifier;
@@ -103,15 +104,15 @@ export class CourseCard implements OnInit {
       telemetryObject,
       values);
     if (layoutName === this.layoutInProgress || content.contentType === ContentType.COURSE) {
-      this.saveContentContext(content);
+      this.saveContentContext(content); console.log('navigated to enrolledcoursedetails');
       this.navCtrl.push(EnrolledCourseDetailsPage, {
         content: content
       });
-    } else if (content.mimeType === MimeType.COLLECTION) {
+    } else if (content.mimeType === MimeType.COLLECTION) { console.log('navigated to collectiondetails');
       this.navCtrl.push(CollectionDetailsPage, {
         content: content
       });
-    } else {
+    } else { console.log('navigated to contentdetails');
       this.navCtrl.push(ContentDetailsPage, {
         content: content
       });

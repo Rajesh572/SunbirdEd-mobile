@@ -13,6 +13,7 @@ import { OnboardingCardComponent } from './onboarding-card/onboarding-card';
 import { OnboardingAlert } from './onboarding-alert/onboarding-alert';
 import { OnboardingService } from './onboarding-card/onboarding.service';
 import { PBHorizontal } from './pbhorizontal/pb-horizontal';
+import { QrPage} from './qrpage/qrpage'
 import { ConfirmAlertComponent } from './confirm-alert/confirm-alert';
 import { ReportIssuesComponent } from './report-issues/report-issues';
 import { FormAndFrameworkUtilService } from '../pages/profile/formandframeworkutil.service';
@@ -44,7 +45,8 @@ import { UnenrollAlertComponent } from './unenroll-alert/unenroll-alert';
         ProfileAvatarComponent,
         DialogPopupComponent,
         BookmarkComponent,
-        UnenrollAlertComponent
+        UnenrollAlertComponent,
+        QrPage //added a new component for qrcode tab
     ],
     imports: [
         IonicPageModule.forChild(CourseCard),
@@ -72,7 +74,8 @@ import { UnenrollAlertComponent } from './unenroll-alert/unenroll-alert';
         ProfileAvatarComponent,
         DialogPopupComponent,
         BookmarkComponent,
-        UnenrollAlertComponent
+        UnenrollAlertComponent,
+        QrPage
         // ContentActionsComponent
     ],
     entryComponents: [
@@ -82,7 +85,8 @@ import { UnenrollAlertComponent } from './unenroll-alert/unenroll-alert';
         ContentRatingAlertComponent,
         ViewCreditsComponent,
         DialogPopupComponent,
-        UnenrollAlertComponent
+        UnenrollAlertComponent,
+        QrPage
     ],
     providers: [
         OnboardingService,

@@ -111,6 +111,7 @@ export class ProfileSettingsPage {
   }
 
   ionViewWillEnter() {
+    this.resetForm(0, false);
     this.hideBackButton = Boolean(this.navParams.get('hideBackButton'));
     if (this.navParams.get('isCreateNavigationStack')) {
       this.navCtrl.insertPages(0, [{ page: 'LanguageSettingsPage' }, { page: 'UserTypeSelectionPage' }]);
@@ -203,7 +204,7 @@ export class ProfileSettingsPage {
           if (this.profile && this.profile.syllabus && this.profile.syllabus[0] !== undefined) {
             this.formAndFrameworkUtilService.getFrameworkDetails(this.profile.syllabus[0])
               .then(catagories => {
-                this.categories = catagories;
+                this.categories = catagories; console.log('categories from getSyllabusDetails',this.categories);
                 this.resetForm(0, false);
               }).catch(error => {
                 console.error('Error', error);
@@ -278,7 +279,11 @@ export class ProfileSettingsPage {
       this.formAndFrameworkUtilService.getFrameworkDetails(this.frameworkId)
         .then(catagories => {
           this.categories = catagories;
-          console.log('this.categories', this.categories);
+          this.gradeList = this.categories[0].terms;
+          this.BoardList = this.categories[1].terms;
+          this.mediumList = this.categories[2].terms;
+
+          console.log('this.categories, currentfield', this.categories, currentField);
           const request: CategoryRequest = {
             currentCategory: this.categories[0].code,
             selectedLanguage: this.translate.currentLang
@@ -381,7 +386,9 @@ export class ProfileSettingsPage {
 
   onSubmit() {
     const loader = this.commonUtilService.getLoader();
-    const formVal = this.userForm.value;
+    const formVal = this.userForm.value; console.log('formVal from line 388 onsubmit',formVal);
+    formVal.syllabus = "niit_tv";
+    formVal.boards = ["school"];
     if (formVal.boards.length === 0) {
       this.btnColor = '#8FC4FF';
       this.appGlobalService.generateSaveClickedTelemetry(this.extractProfileForTelemetry(formVal), 'failed',
@@ -450,7 +457,7 @@ export class ProfileSettingsPage {
     }
   }
 
-  submitEditForm(formVal, loader): void {
+  submitEditForm(formVal, loader): void { console.log('formvalue on submit',formVal);
     const req: Profile = new Profile();
     req.board = formVal.boards;
     req.grade = formVal.grades;
@@ -482,7 +489,7 @@ export class ProfileSettingsPage {
       });
     }
     this.profileService.updateProfile(req)
-      .then((res: any) => {
+      .then((res: any) => { console.log('response from updateprofile',JSON.parse(res));
         if (req.profileType === ProfileType.TEACHER) {
           initTabs(this.container, GUEST_TEACHER_TABS);
         } else if (req.profileType === ProfileType.STUDENT) {

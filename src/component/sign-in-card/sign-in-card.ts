@@ -196,8 +196,8 @@ export class SignInCardComponent {
       this.userProfileService.getTenantInfo(
         request,
         res => {
-          const r = JSON.parse(res);
-          (<any>window).splashscreen.setContent(title, r.logo);
+          const r = JSON.parse(res); //commented next line to avoid splashscreen changes
+         // (<any>window).splashscreen.setContent(title, r.logo);
           resolve();
         },
         error => {

@@ -414,7 +414,7 @@ export class EnrolledCourseDetailsPage {
    */
   extractApiResponse(data): void {
     if (data.result.contentData) {
-      this.course = data.result.contentData;
+      this.course = data.result.contentData; 
       this.objId = this.course.identifier;
       this.objType = this.course.contentType;
       this.objVer = this.course.pkgVersion;
@@ -854,9 +854,9 @@ export class EnrolledCourseDetailsPage {
    */
   ionViewWillEnter(): void {
     this.downloadSize = 0;
-    this.courseCardData = this.navParams.get('content');
+    this.courseCardData = this.navParams.get('content'); console.log('ccdata',this.courseCardData);
     this.corRelationList = this.navParams.get('corRelation');
-    this.source = this.navParams.get('source');
+    this.source = this.navParams.get('source');   console.log('sourse line 859',this.source);
     this.identifier = this.courseCardData.contentId || this.courseCardData.identifier;
     // check if the course is already enrolled
     this.isCourseEnrolled(this.identifier);

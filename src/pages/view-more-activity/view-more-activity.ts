@@ -144,12 +144,12 @@ export class ViewMoreActivityPage implements OnInit {
 	 */
   ionViewWillEnter(): void {
     this.tabBarElement.style.display = 'none';
-    this.searchQuery = this.navParams.get('requestParams');
+    this.searchQuery = this.navParams.get('requestParams'); console.log('searchquery',this.searchQuery);
     this.showDownloadsOnlyToggle = this.navParams.get('showDownloadOnlyToggle');
     this.uid = this.navParams.get('uid');
     this.audience = this.navParams.get('audience');
     if (this.headerTitle !== this.navParams.get('headerTitle')) {
-      this.headerTitle = this.navParams.get('headerTitle');
+      this.headerTitle = this.navParams.get('headerTitle'); console.log('header',this.headerTitle);
       this.offset = 0;
       this.loadMoreBtn = true;
       this.mapper();
@@ -185,19 +185,20 @@ export class ViewMoreActivityPage implements OnInit {
         const contentSearchCriteria = JSON.parse(criteria);
         contentSearchCriteria.limit = 10;
         contentSearchCriteria.offset = this.offset === 0 ? contentSearchCriteria.offset : this.offset;
-
+        console.log('contentserchcriteria',contentSearchCriteria);
+        contentSearchCriteria.impliedFilters = []; //reset impliedfilters to empty
         this.contentService.searchContent(contentSearchCriteria, true, false, false)
           .then((data: any) => {
-            data = JSON.parse(data);
+            data = JSON.parse(data); console.log('data is',data);
             this.ngZone.run(() => {
               if (data.result && data.result.contentDataList) {
                 this.loadMoreBtn = data.result.contentDataList.length < this.searchLimit ? false : true;
                 if (this.isLoadMore) {
                   _.forEach(data.result.contentDataList, (value) => {
-                    this.searchList.push(value);
+                    this.searchList.push(value); console.log('searchlist',this.searchList);
                   });
                 } else {
-                  this.searchList = data.result.contentDataList;
+                  this.searchList = data.result.contentDataList; console.log('searchlist',this.searchList);
                 }
               } else {
                 this.loadMoreBtn = false;
@@ -304,7 +305,7 @@ export class ViewMoreActivityPage implements OnInit {
       .then((data: any) => {
         if (data) {
           data = JSON.parse(data);
-          this.searchList = data.result.courses ? data.result.courses : [];
+          this.searchList = data.result.courses ? data.result.courses : []; console.log('searchlist',this.searchList);
           this.loadMoreBtn = false;
         }
         loader.dismiss();
@@ -349,7 +350,7 @@ export class ViewMoreActivityPage implements OnInit {
           contentData.push(value);
         });
         this.ngZone.run(() => {
-          this.searchList = contentData;
+          this.searchList = contentData; console.log('searchlist',this.searchList);
           loader.dismiss();
           this.loadMoreBtn = false;
         });

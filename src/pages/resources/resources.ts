@@ -406,6 +406,15 @@ export class ResourcesPage implements OnInit, AfterViewInit {
             newSections.push(element);
           });
           // END OF TEMPORARY CODE
+          //Changed Label of Learning Material to What's Happening
+          newSections.map((data) => {
+           if(data.name == "Learning Material") {
+             data.name = "What's Happening";
+             return data;
+           }
+           else return data; 
+          });
+
           that.storyAndWorksheets = newSections;
           this.pageLoadedSuccess = true;
           this.pageApiLoader = false;

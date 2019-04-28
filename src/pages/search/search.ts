@@ -143,6 +143,7 @@ export class SearchPage {
     this.isFirstLaunch = true;
 
     this.init();
+    console.log('search constructor called and init()');
 
     this.defaultAppIcon = 'assets/imgs/ic_launcher.png';
     this.getFrameworkId();
@@ -247,7 +248,6 @@ export class SearchPage {
   }
 
   showContentDetails(content, isRootContent: boolean = false) {
-
     let params;
     if (this.shouldGenerateEndTelemetry) {
       params = {
@@ -283,12 +283,12 @@ export class SearchPage {
           this.isSingleContent = false;
           this.navCtrl.pop();
         }
-        this.navCtrl.push(QrCodeResultPage, params);
+        this.navCtrl.push(QrCodeResultPage, params); console.log('moved to qrresults');
       } else {
-        this.navCtrl.push(CollectionDetailsPage, params);
+        this.navCtrl.push(CollectionDetailsPage, params); console.log('moved to collectiondetails');
       }
     } else {
-      this.navCtrl.push(ContentDetailsPage, params);
+      this.navCtrl.push(ContentDetailsPage, params); console.log('moved to contentdetails');
     }
   }
 
@@ -470,6 +470,8 @@ export class SearchPage {
     this.corRelationList = this.navParams.get('corRelation');
     this.source = this.navParams.get('source');
     this.shouldGenerateEndTelemetry = this.navParams.get('shouldGenerateEndTelemetry');
+    console.log(`dialcode is ${this.dialCode}, contenttype is ${this.contentType},  
+    correlationlist is ${this.corRelationList}, source is ${this.source} `);
     this.generateImpressionEvent();
     const values = new Map();
     values['from'] = this.source;
@@ -507,19 +509,21 @@ export class SearchPage {
     const pageAssembleCriteria = new PageAssembleCriteria();
     pageAssembleCriteria.name = PageName.DIAL_CODE;
     pageAssembleCriteria.filters = pagetAssemblefilter;
+    console.log('pageassemblecriteria from search.ts',pageAssembleCriteria);
 
     this.pageService.getPageAssemble(pageAssembleCriteria).then((res: any) => {
       this.zone.run(() => {
         const response = JSON.parse(res);
         const sections = JSON.parse(response.sections);
+        console.log('sections form dialpage: ',sections);
         if (sections && sections.length) {
-          this.addCorRelation(sections[0].resmsgId, 'API');
+          this.addCorRelation(sections[0].resmsgId,'API');
           this.processDialCodeResult(sections);
           // this.updateFilterIcon();  // TO DO
         }
         this.showLoader = false;
       });
-    }).catch(error => {
+    }).catch(error => { console.log('error from getcontentfordialcode => ',error);
       this.zone.run(() => {
         this.showLoader = false;
         if (!this.commonUtilService.networkInfo.isNetworkAvailable) {
@@ -614,7 +618,7 @@ export class SearchPage {
       if (collectionArray && collectionArray.length > 0) {
         collectionArray.forEach((collection) => {
           contentArray.forEach((content) => {
-            if (collection.childNodes.includes(content.identifier)) {
+            if (collection.childNodes.includes(content.identifier)) { 
               if (collection.content === undefined) {
                 collection.content = [];
               }
@@ -636,7 +640,7 @@ export class SearchPage {
       if (contentArray && contentArray.length > 1) {
         contentArray.forEach((content) => {
           if (addedContent.indexOf(content.identifier) < 0) {
-            dialCodeContentResult.push(content);
+            dialCodeContentResult.push(content); console.log('2122',dialCodeContentResult);
           }
         });
       }

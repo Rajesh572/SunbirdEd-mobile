@@ -17,6 +17,8 @@ import {LanguageSettingsPageModule} from '../pages/language-settings/language-se
 import {UserTypeSelectionPageModule} from '../pages/user-type-selection/user-type-selection.module';
 import {QRScannerModule} from '../pages/qrscanner/qrscanner.module';
 import {SearchModule} from '../pages/search/search.module';
+import {SearchPage} from '../pages/search/search'
+import {QrPage} from '../component/qrpage/qrpage'
 import {CoursesPage} from '../pages/courses/courses';
 import {PageFilterMoudule} from '../pages/page-filter/page.filter.module';
 import {UserAndGroupsPageModule} from '../pages/user-and-groups/user-and-groups.module';
@@ -25,34 +27,46 @@ import {UserReportModule} from '../pages/reports/user-report/user-report.module'
 import {QrCodeResultPageModule} from '../pages/qr-code-result/qr-code-result.module';
 import {TermsAndConditionsPageModule} from '@app/pages/terms-and-conditions/terms-and-conditions.module';
 
+
 // const HOME_TAB = { root: HomePage, icon: "home", label: "HOME_BNAV", index: 0, tabsHideOnSubPages: true };
+//Changed index of Library aka Home from 2 to 1 in tabbar
+const LIBRARY_TAB = {
+    root: ResourcesPage,
+    icon: 'resources',
+    label: 'HOME_BNAV',
+    index: 1,
+    tabsHideOnSubPages: true,
+    isSelected: true
+};
+//Changed index of Course Tab from 1 to 2 in tabbar
 const COURSE_TAB = {
     root: CoursesPage,
     icon: 'courses',
     label: 'COURSES_BNAV',
-    index: 1,
+    index: 2,
     tabsHideOnSubPages: true
 };
-const LIBRARY_TAB = {
-    root: ResourcesPage,
-    icon: 'resources',
-    label: 'LIBRARY_BNAV',
-    index: 2,
-    tabsHideOnSubPages: true,
-    isSelected: true
-};
+//Added a tab for QrScanner at index 3
+const QRSCAN_TAB = {
+    root : QrPage,
+    icon : 'qrcode',
+    label : 'SCAN_QR_BNAV',
+    index : 3,
+    tabsHideOnSubPages : true
+}
+//Profile tabx modved to last index
 const GUEST_PROFILE_TAB = {
     root: GuestProfilePage,
     icon: 'profile',
     label: 'PROFILE_BNAV',
-    index: 3,
+    index: 4,
     tabsHideOnSubPages: true
 };
 const GUEST_PROFILE_SWITCH_TAB = {
     root: GuestProfilePage,
     icon: 'profile',
     label: 'PROFILE_BNAV',
-    index: 3,
+    index: 4,
     tabsHideOnSubPages: true,
     isSelected: true
 };
@@ -60,7 +74,7 @@ const PROFILE_TAB = {
     root: ProfilePage,
     icon: 'profile',
     label: 'PROFILE_BNAV',
-    index: 3,
+    index: 4,
     tabsHideOnSubPages: true
 };
 
@@ -68,6 +82,7 @@ export const GUEST_TEACHER_TABS = [
     // HOME_TAB,
     COURSE_TAB,
     LIBRARY_TAB,
+    QRSCAN_TAB,
     GUEST_PROFILE_TAB
 ];
 
@@ -75,11 +90,13 @@ export const LOGIN_TEACHER_TABS = [
     // HOME_TAB,
     COURSE_TAB,
     LIBRARY_TAB,
+    QRSCAN_TAB,
     PROFILE_TAB
 ];
 
 export const GUEST_STUDENT_TABS = [
     LIBRARY_TAB,
+    QRSCAN_TAB,
     GUEST_PROFILE_TAB
 ];
 
@@ -87,11 +104,14 @@ export const GUEST_TEACHER_SWITCH_TABS = [
     // HOME_TAB,
     COURSE_TAB,
     LIBRARY_TAB,
+    QRSCAN_TAB,
     GUEST_PROFILE_SWITCH_TAB
+   
 ];
 
 export const GUEST_STUDENT_SWITCH_TABS = [
     LIBRARY_TAB,
+    QRSCAN_TAB,
     GUEST_PROFILE_SWITCH_TAB
 ];
 
@@ -105,6 +125,10 @@ export const initTabs = (container: ContainerService, tabs: Array<TabOptions>) =
         });
     }
 };
+
+export function execute() {
+console.log('searchtab clicked');
+}
 
 export const PluginModules = [
     CoursesPageModule,

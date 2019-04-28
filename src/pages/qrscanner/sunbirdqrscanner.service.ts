@@ -81,6 +81,7 @@ export class SunbirdQRScanner {
     displayTextColor = '#0b0b0b',
     buttonText = this.mQRScannerText['SKIP']
   ) {
+    console.log('source is ',source);
     this.source = source;
     this.showButton = showButton;
 

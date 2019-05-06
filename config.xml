@@ -115,10 +115,10 @@
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <plugin name="cordova-plugin-qr-scanner" spec="https://github.com/project-sunbird/cordova-plugin-qr-scanner.git" />
     <plugin name="sb-cordova-plugin-customtabs" spec="https://github.com/Sunbird-Ed/sb-cordova-plugin-customtabs.git">
-        <variable name="URL_SCHEME" value="societal.sunbird" />
+        <variable name="URL_SCHEME" value="camino.sunbird" />
         <variable name="URL_HOST" value="mobile" />
     </plugin>
-    <plugin name="cordova-plugin-qr-scanner" spec="https://github.com/project-sunbird/cordova-plugin-qr-scanner.git" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="7.1.0" />
 </widget>

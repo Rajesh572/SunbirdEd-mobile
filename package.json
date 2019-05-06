@@ -50,7 +50,7 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "@swimlane/ngx-datatable": "^11.1.5",
     "codelyzer": "^4.4.4",
-    "cordova-android": "7.0.0",
+    "cordova-android": "7.1.0",
     "cordova-android-support-gradle-release": "^2.1.0",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-browsertab": "^0.2.0",
@@ -73,7 +73,7 @@
     "cordova-plugin-sunbirdsplash": "git+https://github.com/project-sunbird/cordova-plugin-sunbirdsplash.git",
     "cordova-plugin-uniquedeviceid": "^1.3.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-plugin-x-socialsharing": "^5.4.3",
+    "cordova-plugin-x-socialsharing": "^5.4.4",
     "cordova-sqlite-storage": "^2.3.2",
     "driver.js": "^0.5.2",
     "es6-promise-plugin": "^4.2.2",
@@ -155,7 +155,7 @@
         "ANDROID_SUPPORT_VERSION": "27.1.0"
       },
       "sb-cordova-plugin-customtabs": {
-        "URL_SCHEME": "societal.sunbird",
+        "URL_SCHEME": "camino.sunbird",
         "URL_HOST": "mobile"
       }
     },

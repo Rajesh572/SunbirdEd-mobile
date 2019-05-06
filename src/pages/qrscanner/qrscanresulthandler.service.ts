@@ -23,7 +23,7 @@ import { CommonUtilService } from '../../service/common-util.service';
 import { App } from 'ionic-angular';
 
 @Injectable()
-export class QRScannerResultHandler {
+export class QRScannerResultHandler {debugger;
     private static readonly CORRELATION_TYPE = 'qr';
     source: string;
     constructor(
